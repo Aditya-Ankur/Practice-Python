@@ -3,8 +3,6 @@ print("Press 0 to reverse a number")
 print("Press 1 to reverse a word")
 ans = int(input("Enter your answer : "))
 
-
-
 def reverse_num(x):
     li = []
     for i in x:
