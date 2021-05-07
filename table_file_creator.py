@@ -4,7 +4,7 @@ import shutil
 
 print("This program will print all the multiplication tables from 2 to 20 and will save them in a text file separately")
 
-fname = input("Enter the name of the file you want to store tables in : ")
+fname = input("Enter the name of the folder you want to store tables in : ")
 
 # From where the table will start
 l = int(input("Enter the lower limit of your tables :"))  
