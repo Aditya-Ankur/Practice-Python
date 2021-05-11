@@ -1,4 +1,4 @@
-# This program will provide train reservation and information class 
+# This program will provide train reservation and information using class Railways
 import random
 import time
 import string
