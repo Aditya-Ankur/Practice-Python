@@ -4,9 +4,34 @@ import time
 import string
 import sys
 
-class Railways:
-    '''This will book a ticket, provide train and fare details for a train'''
+def printinfo():
+    '''This function is there to avoid all the clutter from repition of the same code'''
     
+    li = []
+    for letter in string.ascii_uppercase:   #This makes a list of all the uppercase alphabets
+        li.append(letter)
+    
+    global seatlist
+    seatlist = []
+    for x in range(1,num+1):
+        seatlist.append(str(random.choice(li))+ str(random.randint(0,99)))  
+        
+    with open('seat_log.txt','w') as f:
+        for i in seatlist:
+            f.write(i)
+            f.write(" ")
+    paycon = int(input("Press 1 to confirm payment : "))
+    if paycon == 1:
+        print("\nProcessing...\n")
+        time.sleep(3)
+        print("Payment made successfully")
+        print(f"Your {num} seat numbers are as follows : ")
+        for item in seatlist:
+            print(f"\t'{item}'",end=" ")
+
+class Railways:
+    '''This will book or cancel a ticket, provide train and fare details for a train'''
+
     print("Welcome to Indian Railways")
 
     def search(train_number):
@@ -63,73 +88,61 @@ class Railways:
     def book(train_number):
         '''This function will book tickets of the specific given train'''
 
-        li = []
-        for i in string.ascii_uppercase:   #This makes a list of all the uppercase alphabets
-            li.append(i)
-        
         print("Which birth do you prefer")
         print("0 - lower birth")
         print("1 - middle birth")
         print("2 - upper birth")
         ans = int(input("Enter your answer : "))
+        global num
         num = int(input("Enter the number of seat(s) you wanna book : "))
 
-        #This is pile of repeated code with slight changes in them
         if ans == 0:
             price = random.randint(5000,10000)
-            
             print(f"Lower birth seat costs {price}")
             print(f"Total price : {price*num}")
-            paycon = int(input("Press 1 to confirm payment : "))
-            if paycon == 1:
-                print("Processing...")
-                time.sleep(3)
-                print("Payment made successfully")
-                seat = ""
-                
-                for i in range(1,num+1):
-                    seat = seat + str(i) + " - " + str(random.choice(li)) + str(random.randint(0, 100)) + "\n"
-                if num == 1:
-                    print(f"Your seat number is {random.choice(li)}{random.randint(0, 100)}")
-                else:
-                    print(f"Your seat numbers are as follows : \n{seat}")
-
-        elif ans == 1:
-            price = random.randint(1000,5000)
+            printinfo()
             
+        elif ans == 1:
+            price = random.randint(1000,10000)
             print(f"Middle birth seat costs {price}")
             print(f"Total price : {price*num}")
-            paycon = int(input("Press 1 to confirm payment : "))
-            if paycon == 1:
-                print("Processing...")
-                time.sleep(3)
-                print("Payment made successfully")
-                seat = ""
-                
-                for i in range(1,num+1):
-                    seat = seat + str(i) + " - " + str(random.choice(li)) + str(random.randint(0, 100)) + "\n"
-                if num == 1:
-                    print(f"Your seat number is {random.choice(li)}{random.randint(0, 100)}")
-                else:
-                    print(f"Your seat numbers are as follows : \n{seat}")
+            printinfo()
 
         elif ans == 2:
             price = random.randint(500,3000)
             print(f"Upper birth seat costs {price}")
             print(f"Total price : {price*num}")
-            paycon = int(input("Press 1 to confirm payment : "))
-            if paycon == 1:
-                print("\nProcessing...\n")
-                time.sleep(3)
-                print("Payment made successfully")
-                seat = ""
-                
-                for i in range(1,num+1):
-                    seat = seat + str(i) + " - " + str(random.choice(li)) + str(random.randint(0, 100)) + "\n"
-                if num == 1:
-                    print(f"Your seat number is {random.choice(li)}{random.randint(0, 100)}")
-                else:
-                    print(f"Your seat numbers are as follows : \n{seat}")
+            printinfo()
+
+    def cancel(train_number):
+        '''This function will cancel booked tickets'''
+        try:
+            with open('seat_log.txt') as f:
+                seats = f.read()
+                seats = list(seats.split(" "))
+                seats.remove("")
+        except:
+            print("You have not booked any tickets in the given train")
+            sys.exit()
+        
+        print(f"Your booked tickets are as follows : \n{seats}")
+        cn = int(input("How many tickets you want to cancel : "))
+        for i in range(cn):
+            cnc = input("Enter the ticket code you want to cancel : ")
+            seats.remove(cnc)
+        print("\nProcessing...\n")
+        time.sleep(3)
+        print("Seats cancelled successfully")
+        
+        print("Your remaining seat(s) are as follows : ")
+        print(seats)
+        with open('seat_log.txt','w') as f:
+            for i in seats:
+                f.write(i)
+                f.write(" ")
+        print("\nRefunding the ticket amount into your account...\n")
+        time.sleep(3)
+        print("Refund successful")
 
 #Here you can give actual instructions
 #for example
@@ -139,3 +152,4 @@ class Railways:
 # Railways.listTrains('Delhi','Guwahati')
 # Railways.checkseat(11010)
 # Railways.book(11010)
+# Railways.cancel(11010)
