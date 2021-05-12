@@ -3,7 +3,7 @@ def getdate():
     import datetime
     return datetime.datetime.now()
 
-# creating a function names log
+# creating a function named log
 def log(k):
 
     '''This function is used to log all the activities of the user to a respective file'''
