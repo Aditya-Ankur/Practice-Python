@@ -9,7 +9,7 @@ You win when you complete the word.
 I have written it my myself, I didn't copied it xD!
 Show some respect man!'''
 
-#CODE
+#Code
 #As far as I can see,
 #This code is not efficient but it just works and that's fine for me
 #took so long to write and most of the time I was just removing the errors and thinking what to do to make it work
@@ -176,7 +176,7 @@ class Game:
                 if ds_content == li_content:
                     break
             
-            # for the first time, there will be no file hence, in order to not run into an error I have written and Exception
+            # for the first time, there will be no file hence, in order to not run into an error I have written an Exception
             except FileNotFoundError:
                 pass
             
@@ -189,11 +189,11 @@ class Game:
                 self.print_word()
             elif letter is int or letter is float:
                 print("Enter a fricking letter you fool not a number!")
-            elif letter not in word and letter is str:
+            elif letter not in word:
                 print(f"You guessed it wrong. You have {actual_guess} guesses left\n") 
             else:
                 print("Enter a valid input you fool")
-                letter = input("Enter your guess : ")
+        
         self.winner()
 
 class Player:
