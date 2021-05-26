@@ -1,4 +1,4 @@
-# One of my favorite program till now. Took me so long to develop the logic and perform it
+#Not anymore
 import os
 import shutil
 
